@@ -5,6 +5,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieparser = require("cookie-parser");
 const auth_cookie = require("./routers/middleware/authMiddleware");
+const createError = require("http-errors"); //fall21
+const morgan = require("morgan");
 
 const onConnected = require("./socket/main");
 require("dotenv").config();
@@ -13,7 +15,10 @@ const app = express();
 app.use(express.urlencoded({ extended: false })); //url encode parse
 app.use(express.json()); //json parse
 app.use(cookieparser()); // parse http cookie
-app.use(cors({ origin: true, credentials: true })); //enable cros
+app.use(cors({ origin: true, credentials: true })); //enable cors
+
+
+app.use(morgan("dev"));
 
 /**
  * @enable cookie store in front end
@@ -27,6 +32,11 @@ app.use(cors({ origin: true, credentials: true })); //enable cros
 app.get("/", (req, res) => {
   res.send("working...");
 });
+
+
+// app.use((req, res, next) => {
+//   next(createError.NotFound());
+// });
 
 // sample code start here
 // @description use for support chat system @author milon27
@@ -62,8 +72,11 @@ app.use("/notice", auth_cookie, require("./routers/notice/noticeRouter"));
 // @description use for career  @author milon27
 app.use("/career", auth_cookie, require("./routers/career/careerRouter"));
 
-// @description use for career  @author FahimHossain
+// @description use for Task Management  @author FahimHossain
 app.use("/task", auth_cookie, require("./routers/task/taskRouter"));
+
+// @description use for Event Management  @author FahimHossain
+app.use("/event", auth_cookie, require("./routers/event/eventRouter"));
 
 /**
  * @init_server

@@ -1,5 +1,5 @@
 /**
- * @design by milon27
+ * @design by FahimHossain
  * @sample router
  */
 
@@ -15,5 +15,9 @@ const router = express.Router();
  * @example http://localhost:2727/task/add
  */
 router.post("/add", TaskController.createTask);
+router.get("/get-all", TaskController.viewTasks);
+
+//http://localhost:2727/task/:id
+router.delete("/:id",TaskController.deleteTask)
 
 module.exports = router;

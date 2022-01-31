@@ -34,8 +34,10 @@ const Helper = {
     //validation of empty field
     validateField: (...arr) => {
         const n_arr = arr.filter(itm => {
-            if (itm && itm !== null && itm !== undefined) {
+            if (itm !== null && itm !== undefined) {
                 return true
+            }else{
+                console.log("invalid: ",itm)
             }
         })
         if (n_arr.length === arr.length) {

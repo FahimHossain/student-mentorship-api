@@ -19,5 +19,6 @@ const DB_Define = {
   STUDENT_SKILL_LIST_TABLE: "student_skill_list",
   //faculty task
   FACULTY_TASK_TABLE: "faculty_task",
+  CREATED_AT: "created_at",
 };
 module.exports = DB_Define;
